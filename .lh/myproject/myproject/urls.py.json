@@ -1,0 +1,26 @@
+{
+    "sourceFile": "myproject/myproject/urls.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1714460593198,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1714460603690,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,8 @@\n from django.urls import path, include\r\n \r\n urlpatterns = [\r\n     path('admin/', admin.site.urls),\r\n-    path('playground/', include('playground.urls'))\r\n+    path('playground/', include('playground.urls')),\r\n     path('', ),\r\n     path('about/',),\r\n ]\r\n"
+                },
+                {
+                    "date": 1714460762613,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,26 @@\n+\"\"\"\r\n+URL configuration for myproject project.\r\n+\r\n+The `urlpatterns` list routes URLs to views. For more information please see:\r\n+    https://docs.djangoproject.com/en/5.0/topics/http/urls/\r\n+Examples:\r\n+Function views\r\n+    1. Add an import:  from my_app import views\r\n+    2. Add a URL to urlpatterns:  path('', views.home, name='home')\r\n+Class-based views\r\n+    1. Add an import:  from other_app.views import Home\r\n+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')\r\n+Including another URLconf\r\n+    1. Import the include() function: from django.urls import include, path\r\n+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))\r\n+\"\"\"\r\n+from django.contrib import admin\r\n+from django.urls import path, include\r\n+from . import views\r\n+\r\n+urlpatterns = [\r\n+    path('admin/', admin.site.urls),\r\n+    path('playground/', include('playground.urls')),\r\n+    path('', views.homepage),\r\n+    path('about/',views.about),\r\n+]\r\n"
+                }
+            ],
+            "date": 1714460593198,
+            "name": "Commit-0",
+            "content": "\"\"\"\r\nURL configuration for myproject project.\r\n\r\nThe `urlpatterns` list routes URLs to views. For more information please see:\r\n    https://docs.djangoproject.com/en/5.0/topics/http/urls/\r\nExamples:\r\nFunction views\r\n    1. Add an import:  from my_app import views\r\n    2. Add a URL to urlpatterns:  path('', views.home, name='home')\r\nClass-based views\r\n    1. Add an import:  from other_app.views import Home\r\n    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')\r\nIncluding another URLconf\r\n    1. Import the include() function: from django.urls import include, path\r\n    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))\r\n\"\"\"\r\nfrom django.contrib import admin\r\nfrom django.urls import path, include\r\n\r\nurlpatterns = [\r\n    path('admin/', admin.site.urls),\r\n    path('playground/', include('playground.urls'))\r\n    path('', ),\r\n    path('about/',),\r\n]\r\n"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "sourceFile": "myproject/playground/views.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1714460402912,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1714473774346,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,4 +3,10 @@\n from .models import Post\r\n \r\n def say_hello(request):\r\n     return render(request, 'hello.html', {'name':'Sabari'})\r\n+\r\n+\r\n+def posts_list(request):\r\n+    posts = Post.objects.all()\r\n+    return render(request, 'post_list.html',\r\n+                  {'posts':posts})\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1714460402912,
+            "name": "Commit-0",
+            "content": "from django.shortcuts import render\r\nfrom django.http import HttpResponse\r\nfrom .models import Post\r\n\r\ndef say_hello(request):\r\n    return render(request, 'hello.html', {'name':'Sabari'})\r\n"
+        }
+    ]
+}

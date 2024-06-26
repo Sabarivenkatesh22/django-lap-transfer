@@ -1,0 +1,66 @@
+{
+    "sourceFile": "library/book/models.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 12,
+            "patches": [
+                {
+                    "date": 1714976561355,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1714976701942,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,10 @@\n from django.db import models\r\n \r\n-# Create your models here.\r\n-\r\n class Book(models.Model):\r\n-    name = models.CharField(max_length=100)\r\n-    author = models.IntegerField()\r\n-    \r\n+    title = models.CharField(max_length=255)\r\n+    author = models.CharField(max_length=100)\r\n+    publication_date = models.DateField()\r\n+    ISBN = models.CharField(max_length=13)\r\n+    description = models.TextField()\r\n+    genre = models.CharField(max_length=50)\r\n+    # Add other fields as needed\r\n"
+                },
+                {
+                    "date": 1714978415270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \r\n class Book(models.Model):\r\n     title = models.CharField(max_length=255)\r\n     author = models.CharField(max_length=100)\r\n-    publication_date = models.DateField()\r\n-    ISBN = models.CharField(max_length=13)\r\n-    description = models.TextField()\r\n-    genre = models.CharField(max_length=50)\r\n+    # publication_date = models.DateField()\r\n+    # ISBN = models.CharField(max_length=13)\r\n+    # description = models.TextField()\r\n+    # genre = models.CharField(max_length=50)\r\n     # Add other fields as needed\r\n"
+                },
+                {
+                    "date": 1714980688583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \r\n class Book(models.Model):\r\n     title = models.CharField(max_length=255)\r\n     author = models.CharField(max_length=100)\r\n-    # publication_date = models.DateField()\r\n-    # ISBN = models.CharField(max_length=13)\r\n-    # description = models.TextField()\r\n-    # genre = models.CharField(max_length=50)\r\n+    publication_date = models.DateField()\r\n+    ISBN = models.CharField(max_length=13)\r\n+    description = models.TextField()\r\n+    genre = models.CharField(max_length=50)\r\n     # Add other fields as needed\r\n"
+                },
+                {
+                    "date": 1714980758891,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n from django.db import models\r\n \r\n class Book(models.Model):\r\n+    ISBN = models.CharField(max_length=13, unique=True)\r\n     title = models.CharField(max_length=255)\r\n     author = models.CharField(max_length=100)\r\n     publication_date = models.DateField()\r\n-    ISBN = models.CharField(max_length=13)\r\n     description = models.TextField()\r\n     genre = models.CharField(max_length=50)\r\n     # Add other fields as needed\r\n"
+                },
+                {
+                    "date": 1714981270007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n from django.db import models\r\n \r\n class Book(models.Model):\r\n+    id = models.AutoField(primary_key=True)\r\n     ISBN = models.CharField(max_length=13, unique=True)\r\n     title = models.CharField(max_length=255)\r\n     author = models.CharField(max_length=100)\r\n     publication_date = models.DateField()\r\n"
+                },
+                {
+                    "date": 1714982198153,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,20 @@\n+import random\r\n+import string\r\n from django.db import models\r\n \r\n class Book(models.Model):\r\n     id = models.AutoField(primary_key=True)\r\n-    ISBN = models.CharField(max_length=13, unique=True)\r\n+    \r\n     title = models.CharField(max_length=255)\r\n     author = models.CharField(max_length=100)\r\n     publication_date = models.DateField()\r\n     description = models.TextField()\r\n     genre = models.CharField(max_length=50)\r\n+    \r\n+\r\n+    def generate_isbn():\r\n+        # Implement your logic to generate a random ISBN\r\n+        return '978' + ''.join(random.choices(string.digits, k=9))\r\n+\r\n     # Add other fields as needed\r\n+    ISBN = models.CharField(max_length=13, unique=True, default=generate_isbn)\r\n"
+                },
+                {
+                    "date": 1714983167108,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,14 @@\n     genre = models.CharField(max_length=50)\r\n     \r\n \r\n     def generate_isbn():\r\n-        # Implement your logic to generate a random ISBN\r\n-        return '978' + ''.join(random.choices(string.digits, k=9))\r\n+        while True:\r\n+            # Generate a random ISBN\r\n+            isbn = '978' + ''.join(random.choices(string.digits, k=9))\r\n+            \r\n+            # Check if the generated ISBN already exists in the database\r\n+            if not Book.objects.filter(ISBN=isbn).exists():\r\n+                return isbn\r\n \r\n     # Add other fields as needed\r\n     ISBN = models.CharField(max_length=13, unique=True, default=generate_isbn)\r\n"
+                },
+                {
+                    "date": 1714983203980,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,5 +21,5 @@\n             if not Book.objects.filter(ISBN=isbn).exists():\r\n                 return isbn\r\n \r\n     # Add other fields as needed\r\n-    ISBN = models.CharField(max_length=13, unique=True, default=generate_isbn)\r\n+    ISBN = models.CharField(max_length=13, unique=True, default='')\r\n"
+                },
+                {
+                    "date": 1714983314152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,5 +21,5 @@\n             if not Book.objects.filter(ISBN=isbn).exists():\r\n                 return isbn\r\n \r\n     # Add other fields as needed\r\n-    ISBN = models.CharField(max_length=13, unique=True, default='')\r\n+    ISBN = models.CharField(max_length=13, unique=True, default=generate_isbn)\r\n"
+                },
+                {
+                    "date": 1714983791851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,4 +22,7 @@\n                 return isbn\r\n \r\n     # Add other fields as needed\r\n     ISBN = models.CharField(max_length=13, unique=True, default=generate_isbn)\r\n+\r\n+    class meta:\r\n+        verbose_name = \"Book\"\r\n"
+                },
+                {
+                    "date": 1714983808458,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n     title = models.CharField(max_length=255)\r\n     author = models.CharField(max_length=100)\r\n     publication_date = models.DateField()\r\n     description = models.TextField()\r\n-    genre = models.CharField(max_length=50)\r\n+    # genre = models.CharField(max_length=50)\r\n     \r\n \r\n     def generate_isbn():\r\n         while True:\r\n"
+                },
+                {
+                    "date": 1714983817834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n     title = models.CharField(max_length=255)\r\n     author = models.CharField(max_length=100)\r\n     publication_date = models.DateField()\r\n     description = models.TextField()\r\n-    # genre = models.CharField(max_length=50)\r\n+    genre = models.CharField(max_length=50)\r\n     \r\n \r\n     def generate_isbn():\r\n         while True:\r\n"
+                }
+            ],
+            "date": 1714976561354,
+            "name": "Commit-0",
+            "content": "from django.db import models\r\n\r\n# Create your models here.\r\n\r\nclass Book(models.Model):\r\n    name = models.CharField(max_length=100)\r\n    author = models.IntegerField()\r\n    \r\n"
+        }
+    ]
+}

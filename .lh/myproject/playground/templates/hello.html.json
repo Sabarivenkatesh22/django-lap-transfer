@@ -1,0 +1,22 @@
+{
+    "sourceFile": "myproject/playground/templates/hello.html",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1714460447048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1714460469703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,2 @@\n <h1>Hello {{ name }}</h1>\r\n \r\n-{% for post in posts %}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1714460447048,
+            "name": "Commit-0",
+            "content": "<h1>Hello {{ name }}</h1>\r\n\r\n{% for post in posts %}"
+        }
+    ]
+}

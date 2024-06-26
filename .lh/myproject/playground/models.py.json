@@ -1,0 +1,26 @@
+{
+    "sourceFile": "myproject/playground/models.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1714458192016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1714458365419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n # Create your models here.\r\n \r\n class  Post(models.Model):\r\n     title = models.CharField(max_length=75)\r\n-    body\r\n-    slug\r\n-    date\n\\ No newline at end of file\n+    body = models.TextField()\r\n+    slug = models.SlugField()\r\n+    date = models.DateTimeField(auto_now_add=True)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1714460405472,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,5 +5,9 @@\n class  Post(models.Model):\r\n     title = models.CharField(max_length=75)\r\n     body = models.TextField()\r\n     slug = models.SlugField()\r\n-    date = models.DateTimeField(auto_now_add=True)\n\\ No newline at end of file\n+    date = models.DateTimeField(auto_now_add=True) \r\n+\r\n+\r\n+    def __str__(self):\r\n+        return self.title\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1714458192016,
+            "name": "Commit-0",
+            "content": "from django.db import models\r\n\r\n# Create your models here.\r\n\r\nclass  Post(models.Model):\r\n    title = models.CharField(max_length=75)\r\n    body\r\n    slug\r\n    date"
+        }
+    ]
+}

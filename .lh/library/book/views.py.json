@@ -1,0 +1,58 @@
+{
+    "sourceFile": "library/book/views.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1714977182172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1714977193038,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n from rest_framework.decorators import api_view\r\n from rest_framework.response import Response\r\n # from home.serializers import PeopleSerializer\r\n-from .models import Person\r\n+from .models import Book\r\n \r\n \r\n @api_view(['GET', 'POST', 'PUT'])\r\n def index(request):\r\n"
+                },
+                {
+                    "date": 1714977249333,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,11 +21,10 @@\n \r\n @api_view(['GET', 'POST'])\r\n def person(request):\r\n     if request.method == 'GET':\r\n-        objs = Person.objects.all()\r\n-        serializer = PeopleSerializer(objs, many=True)\r\n-        return Response(serializer.data)\r\n+        objs = Book.objects.all()\r\n+        return Response(objs)\r\n \r\n     else:\r\n         data = request.data\r\n         serializer = PeopleSerializer(data=data)\r\n"
+                },
+                {
+                    "date": 1714977369069,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,12 +24,14 @@\n     if request.method == 'GET':\r\n         objs = Book.objects.all()\r\n         return Response(objs)\r\n \r\n-    else:\r\n+    elif request.method == 'POST':\r\n         data = request.data\r\n-        serializer = PeopleSerializer(data=data)\r\n-        if serializer.is_valid():\r\n-            serializer.save()\r\n-            return Response(serializer.data)\r\n+        # serializer = PeopleSerializer(data=data)\r\n\\ No newline at end of file\n+        # if serializer.is_valid():\r\n+        #     serializer.save()\r\n+        new_book = Book(data)\r\n+        new_book.save()\r\n+        return Response(new_book)\r\n         \r\n-        return Response(serializer.errors)\n+        # return Response(serializer.errors)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1714977385123,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n         print(\"from post request\")\r\n         return Response(data)\r\n \r\n @api_view(['GET', 'POST'])\r\n-def person(request):\r\n+def book_controller(request):\r\n     if request.method == 'GET':\r\n         objs = Book.objects.all()\r\n         return Response(objs)\r\n \r\n"
+                },
+                {
+                    "date": 1714977396294,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,37 @@\n+from rest_framework.decorators import api_view\r\n+from rest_framework.response import Response\r\n+# from home.serializers import PeopleSerializer\r\n+from .models import Book\r\n+\r\n+\r\n+@api_view(['GET', 'POST', 'PUT'])\r\n+def index(request):\r\n+    if request.method == 'GET':\r\n+        params = request.query_params\r\n+        # print(params['param1'])\r\n+        courses = {\r\n+            'course_name' : 'Python',\r\n+            'learn' : ['flask', 'Django', 'Tornodo', 'FastAPi']\r\n+        }\r\n+        return Response(courses)\r\n+    elif request.method == 'POST':\r\n+        data = request.data\r\n+        print(\"from post request\")\r\n+        return Response(data)\r\n+\r\n+@api_view(['GET', 'POST'])\r\n+def book_controller(request):\r\n+    if request.method == 'GET':\r\n+        objs = Book.objects.all()\r\n+        return Response(objs)\r\n+\r\n+    elif request.method == 'POST':\r\n+        data = request.data\r\n+        # serializer = PeopleSerializer(data=data)\r\n+        # if serializer.is_valid():\r\n+        #     serializer.save()\r\n+        new_book = Book(data)\r\n+        new_book.save()\r\n+        return Response(new_book)\r\n+        \r\n+        # return Response(serializer.errors)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1714978243346,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,46 +29,10 @@\n         data = request.data\r\n         # serializer = PeopleSerializer(data=data)\r\n         # if serializer.is_valid():\r\n         #     serializer.save()\r\n-        new_book = Book(data)\r\n-        new_book.save()\r\n-        return Response(new_book)\r\n-        \r\n-        # return Response(serializer.errors)\n-from rest_framework.decorators import api_view\r\n-from rest_framework.response import Response\r\n-# from home.serializers import PeopleSerializer\r\n-from .models import Book\r\n-\r\n-\r\n-@api_view(['GET', 'POST', 'PUT'])\r\n-def index(request):\r\n-    if request.method == 'GET':\r\n-        params = request.query_params\r\n-        # print(params['param1'])\r\n-        courses = {\r\n-            'course_name' : 'Python',\r\n-            'learn' : ['flask', 'Django', 'Tornodo', 'FastAPi']\r\n-        }\r\n-        return Response(courses)\r\n-    elif request.method == 'POST':\r\n-        data = request.data\r\n-        print(\"from post request\")\r\n+        print(data)\r\n+        # new_book = Book(data)\r\n+        # new_book.save()\r\n         return Response(data)\r\n-\r\n-@api_view(['GET', 'POST'])\r\n-def book_controller(request):\r\n-    if request.method == 'GET':\r\n-        objs = Book.objects.all()\r\n-        return Response(objs)\r\n-\r\n-    elif request.method == 'POST':\r\n-        data = request.data\r\n-        # serializer = PeopleSerializer(data=data)\r\n-        # if serializer.is_valid():\r\n-        #     serializer.save()\r\n-        new_book = Book(data)\r\n-        new_book.save()\r\n-        return Response(new_book)\r\n         \r\n         # return Response(serializer.errors)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1714979035901,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n from rest_framework.decorators import api_view\r\n from rest_framework.response import Response\r\n # from home.serializers import PeopleSerializer\r\n from .models import Book\r\n+from .serilalizers import BookSerializer\r\n \r\n \r\n @api_view(['GET', 'POST', 'PUT'])\r\n def index(request):\r\n@@ -22,9 +23,10 @@\n @api_view(['GET', 'POST'])\r\n def book_controller(request):\r\n     if request.method == 'GET':\r\n         objs = Book.objects.all()\r\n-        return Response(objs)\r\n+        serialiser = BookSerializer(objs, many = True)\r\n+        return Response(serialiser.data)\r\n \r\n     elif request.method == 'POST':\r\n         data = request.data\r\n         # serializer = PeopleSerializer(data=data)\r\n"
+                },
+                {
+                    "date": 1714979417977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,13 +28,14 @@\n         return Response(serialiser.data)\r\n \r\n     elif request.method == 'POST':\r\n         data = request.data\r\n-        # serializer = PeopleSerializer(data=data)\r\n-        # if serializer.is_valid():\r\n-        #     serializer.save()\r\n-        print(data)\r\n+        serializer = BookSerializer(data=data)\r\n+        if serializer.is_valid():\r\n+            serializer.save()\r\n+            return Response(serialiser.data)\r\n+        # print(data)\r\n         # new_book = Book(data)\r\n         # new_book.save()\r\n-        return Response(data)\r\n         \r\n+        \r\n         # return Response(serializer.errors)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1714979440563,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,5 +37,5 @@\n         # new_book = Book(data)\r\n         # new_book.save()\r\n         \r\n         \r\n-        # return Response(serializer.errors)\n\\ No newline at end of file\n+        return Response(serializer.errors)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1714979677950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n         data = request.data\r\n         serializer = BookSerializer(data=data)\r\n         if serializer.is_valid():\r\n             serializer.save()\r\n-            return Response(serialiser.data)\r\n+            return Response(serializer.data)\r\n         # print(data)\r\n         # new_book = Book(data)\r\n         # new_book.save()\r\n         \r\n"
+                }
+            ],
+            "date": 1714977182172,
+            "name": "Commit-0",
+            "content": "from rest_framework.decorators import api_view\r\nfrom rest_framework.response import Response\r\n# from home.serializers import PeopleSerializer\r\nfrom .models import Person\r\n\r\n\r\n@api_view(['GET', 'POST', 'PUT'])\r\ndef index(request):\r\n    if request.method == 'GET':\r\n        params = request.query_params\r\n        # print(params['param1'])\r\n        courses = {\r\n            'course_name' : 'Python',\r\n            'learn' : ['flask', 'Django', 'Tornodo', 'FastAPi']\r\n        }\r\n        return Response(courses)\r\n    elif request.method == 'POST':\r\n        data = request.data\r\n        print(\"from post request\")\r\n        return Response(data)\r\n\r\n@api_view(['GET', 'POST'])\r\ndef person(request):\r\n    if request.method == 'GET':\r\n        objs = Person.objects.all()\r\n        serializer = PeopleSerializer(objs, many=True)\r\n        return Response(serializer.data)\r\n\r\n    else:\r\n        data = request.data\r\n        serializer = PeopleSerializer(data=data)\r\n        if serializer.is_valid():\r\n            serializer.save()\r\n            return Response(serializer.data)\r\n        \r\n        return Response(serializer.errors)"
+        }
+    ]
+}

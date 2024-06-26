@@ -1,0 +1,30 @@
+{
+    "sourceFile": "rest_api_sample/api/urls.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1714631015680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1714631034423,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,5 @@\n from home.views import index\r\n-\r\n-from django.contrib import admin\r\n from django.urls import path\r\n \r\n urlpatterns = [\r\n     path('admin/', admin.site.urls),\r\n"
+                },
+                {
+                    "date": 1714631059681,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n from home.views import index\r\n from django.urls import path\r\n \r\n urlpatterns = [\r\n-    path('admin/', admin.site.urls),\r\n+    path('index/', index),\r\n ]\r\n"
+                },
+                {
+                    "date": 1714651190333,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n-from home.views import index\r\n+from home.views import index, person\r\n from django.urls import path\r\n \r\n urlpatterns = [\r\n     path('index/', index),\r\n+    path('person/', person)\r\n ]\r\n"
+                }
+            ],
+            "date": 1714631015680,
+            "name": "Commit-0",
+            "content": "from home.views import index\r\n\r\nfrom django.contrib import admin\r\nfrom django.urls import path\r\n\r\nurlpatterns = [\r\n    path('admin/', admin.site.urls),\r\n]\r\n"
+        }
+    ]
+}

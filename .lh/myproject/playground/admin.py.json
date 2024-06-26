@@ -1,0 +1,22 @@
+{
+    "sourceFile": "myproject/playground/admin.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1714459888274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1714647908482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n from django.contrib import admin\r\n from .models import Post\r\n # Register your models here.\r\n-admin.site.register(Post)\n\\ No newline at end of file\n+admin.site.register(Post)\r\n+\r\n"
+                }
+            ],
+            "date": 1714459888274,
+            "name": "Commit-0",
+            "content": "from django.contrib import admin\r\nfrom .models import Post\r\n# Register your models here.\r\nadmin.site.register(Post)"
+        }
+    ]
+}
